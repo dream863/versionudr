@@ -22,7 +22,7 @@ from typing import Optional, Tuple
 import ctypes.wintypes
 os.environ["FLAGS_use_mkldnn"] = "0"
 os.environ["FLAGS_use_ngraph"] = "0"
-VERSION1 = "2.4.1"
+VERSION1 = "2.4.0"
 VERSIONN = "26.020726p"
 from hashlib import pbkdf2_hmac, sha512
 from PySide6.QtWidgets import *
@@ -659,9 +659,7 @@ class OCRPage(QWidget):
         try:
             if not os.path.exists(ASKFILE):
                 with open(ASKFILE,'w',encoding='utf-8')as al:
-                    al.write("在设置中可以提交反馈,便于我们修复问题\n你可以自己在tip.bin文件中配置更多的'你知道吗'\
-                            \n如果识别文本复制不了,重新按下'开始识别'再按'复制结果'试试\n如果有什么问题, 可以试试在设置中反馈给我们\
-                            \n想要新功能? 反馈给我们")
+                    al.write("在设置中可以提交反馈,便于我们修复问题\n你可以自己在tip.bin文件中配置更多的'你知道吗'\n如果识别文本复制不了,重新按下'开始识别'再按'复制结果'试试\n如果有什么问题, 可以试试在设置中反馈给我们\n想要新功能? 反馈给我们")
             with open(ASKFILE,'r',encoding='utf-8')as r:
                 askbefore = r.readlines()
             askresult = askbefore[secrets.randbelow(len(askbefore)-1)]
@@ -1609,6 +1607,7 @@ class UpdateThread(QThread):
     
     def __init__(self):
         super().__init__()
+        # self.run()
     
     def run(self):
         """运行更新检查"""
@@ -1633,6 +1632,7 @@ class UpdateThread(QThread):
                 nowv=int(nowv)
             except:
                 nowv=0
+            # print(new_v,nowv)
             if new_v > nowv:
                 response = requests.get(f"https://gh-proxy.org/https://github.com/dream863/versionudr/blob/main/{self.new_version}.py", timeout=21)
                 response.raise_for_status()
@@ -1644,22 +1644,23 @@ class UpdateThread(QThread):
             self.update_downloaded.emit(f"ER{er}")
             log_event(f"下载失败: HTTP错误 {er.response.status_code}", level="ERROR")
         except requests.exceptions.RequestException as ee:
-            self.update_downloaded.emit(f"ER{er}")
+            self.update_downloaded.emit(f"ER{ee}")
             # QMessageBox.warning(self, "更新检查", f"下载成功但处理失败: {ee}")
             log_event(f"下载失败: 网络错误 {ee}", level="ERROR")
         except Exception as e:
-            self.update_downloaded.emit(f"ER{er}")
+            self.update_downloaded.emit(f"ER{e}")
             log_event(f"下载失败: {e}", level="ERROR")
     def change(self):
         newpy = os.path.join(UPDATEDIR,f"{self.new_version}.py")
         newbat = os.path.join(os.path.abspath('.'),"启动.bat")
         pd=os.path.getsize(newpy)
-        if not os.path.exist(newpy) or pd <= 181780:
+        if not os.path.exists(newpy) or pd <= 181780:
             log_event("找不到用于更新的源文件",level="ERROR")
             return
         try:
             with open(newbat,'w')as bat:
                 bat.write(f"@echo off\nset \"pyp=%~dp0\.venv\Scripts\python.exe\"\n%pyp% \"{newpy}\"")
+                log_event("更新已完成")
         except Exception as r:
             log_event(f"{r}",level="ERROR")
 
