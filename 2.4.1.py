@@ -22,7 +22,7 @@ from typing import Optional, Tuple
 import ctypes.wintypes
 os.environ["FLAGS_use_mkldnn"] = "0"
 os.environ["FLAGS_use_ngraph"] = "0"
-VERSION1 = "2.4.0"
+VERSION1 = "2.4.1"
 VERSIONN = "26.020726p"
 from hashlib import pbkdf2_hmac, sha512
 from PySide6.QtWidgets import *
@@ -1420,7 +1420,7 @@ class SettingsPage(QWidget):
                 msg_box = QMessageBox(self)
                 msg_box.setIcon(QMessageBox.Information)
                 msg_box.setWindowTitle("检查更新")
-                msg_box.setText(f"发现新版本!\n\n最新版本: {new_version}\n请找开发者获取最新版本")
+                msg_box.setText(f"发现新版本!\n\n最新版本: {new_version}\n点击ok将自动安装更新，重启程序后生效")
                 msg_box.setStandardButtons(QMessageBox.Ok)
                 # 添加自定义按钮查看文件
                 # view_btn = msg_box.addButton("查看文件", QMessageBox.ActionRole)
@@ -4695,3 +4695,4 @@ if __name__ == '__main__':
     except Exception as e:
         log_event(f"错误:{str(e)}", level="ERROR")
         QMessageBox.critical(None, "错误", f"请将runlog.log文件发送给开发者以获取帮助!\n{str(e)}")
+
