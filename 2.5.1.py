@@ -22,7 +22,7 @@ from typing import Optional, Tuple
 import ctypes.wintypes
 os.environ["FLAGS_use_mkldnn"] = "0"
 os.environ["FLAGS_use_ngraph"] = "0"
-VERSION1 = "2.4.2"
+VERSION1 = "2.5.1"
 VERSIONN = "26.021027p"
 from hashlib import pbkdf2_hmac, sha512
 from PySide6.QtWidgets import *
@@ -4550,3 +4550,4 @@ if __name__ == '__main__':
     except Exception as e:
         log_event(f"错误:{str(e)}", level="ERROR")
         QMessageBox.critical(None, "错误", f"请将runlog.log文件发送给开发者以获取帮助!\n{str(e)}")
+
