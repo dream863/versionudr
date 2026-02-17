@@ -1,14 +1,4 @@
-# -*- coding: utf-8 -*-
-#这是图片转文本的主程序
-#2025/1/27/20:38
-#二次修改于2025/12/20 17:34
-#模块版本paddleocr-2.7.0.3 opencv-python-4.6.0.66 paddlepaddle-2.6.2
-# pip install numpy==1.26.4
-# pip install paddlepaddle==2.6.2
-# pip install opencv-python==4.6.0.66
-# pip install paddleocr==2.7.0.3
-# ©DNE 2026 TNingOCR® 
-# --------------------------------------------------------------------
+
 import sys,binascii
 import os,secrets,sqlite3
 import datetime#,shutil
@@ -4550,4 +4540,5 @@ if __name__ == '__main__':
     except Exception as e:
         log_event(f"错误:{str(e)}", level="ERROR")
         QMessageBox.critical(None, "错误", f"请将runlog.log文件发送给开发者以获取帮助!\n{str(e)}")
+
 
