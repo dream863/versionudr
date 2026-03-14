@@ -1,12 +1,3 @@
-# -*- coding: utf-8 -*-
-#这是图片转文本的主程序
-#2025/1/27/20:38
-#二次修改于2025/12/20 17:34
-#模块版本paddleocr-2.7.0.3 opencv-python-4.6.0.66 paddlepaddle-2.6.2
-# pip install numpy==1.26.4
-# pip install paddlepaddle==2.6.2
-# pip install opencv-python==4.6.0.66
-# pip install paddleocr==2.7.0.3
 # ©DNE 2026 TNingOCR® 
 # --------------------------------------------------------------------
 import sys,binascii
@@ -24,7 +15,7 @@ from typing import Optional, Tuple
 import ctypes.wintypes
 os.environ["FLAGS_use_mkldnn"] = "0"
 os.environ["FLAGS_use_ngraph"] = "0"
-VERSION1 = "2.5.3"
+VERSION1 = "2.5.5"
 VERSIONN = "26.031333p"
 from hashlib import pbkdf2_hmac, sha512,sha256,sha384
 from PySide6.QtWidgets import *
